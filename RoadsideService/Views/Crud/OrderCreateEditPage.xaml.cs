@@ -212,11 +212,12 @@ namespace RoadsideService.Views.Crud
             {
                 var totalPayment = _context.ServicePayments
                     .Where(p => p.AppointmentID == _serviceOrder.OrderID)
-                    .Sum(p => p.Amount);
+                    .Sum(p => (decimal?)p.Amount) ?? 0;
 
                 TotalPaymentTextBlock.Text = totalPayment.ToString("F2") + " ₽";
             }
         }
+
 
         private void UpdateRemainingPayment()
         {
@@ -224,11 +225,11 @@ namespace RoadsideService.Views.Crud
             {
                 var total = _context.ServiceOrderDetails
                     .Where(d => d.OrderID == _serviceOrder.OrderID)
-                    .Sum(d => d.Services.Price);
+                    .Sum(d => (decimal?)d.Services.Price) ?? 0;
 
                 var totalPayment = _context.ServicePayments
                     .Where(p => p.AppointmentID == _serviceOrder.OrderID)
-                    .Sum(p => p.Amount);
+                    .Sum(p => (decimal?)p.Amount) ?? 0;
 
                 var remainingPayment = total - totalPayment;
                 RemainingPaymentTextBlock.Text = remainingPayment.ToString("F2") + " ₽";

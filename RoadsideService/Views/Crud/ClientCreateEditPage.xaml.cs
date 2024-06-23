@@ -19,7 +19,7 @@ namespace RoadsideService.Views.Crud
 
         public ClientCreateEditPage(Customers client) : this()
         {
-            _client = client;
+            _client = _context.Customers.FirstOrDefault(c => c.CustomerID == client.CustomerID);
             LoadClientDetails();
         }
 

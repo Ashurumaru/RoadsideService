@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace RoadsideService.Views.Pages
 {
@@ -19,6 +20,24 @@ namespace RoadsideService.Views.Pages
             InitializeComponent();
             _context = new RoadsideServiceEntities();
             LoadClients();
+            this.Loaded += Page_Loaded;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadClients();
+            if (this.NavigationService != null)
+            {
+                this.NavigationService.Navigated += OnNavigated;
+            }
+        }
+
+        private void OnNavigated(object sender, NavigationEventArgs e)
+        {
+            if (e.Content is ClientCreateEditPage)
+            {
+                LoadClients();
+            }
         }
 
         private void LoadClients(string searchTerm = "")

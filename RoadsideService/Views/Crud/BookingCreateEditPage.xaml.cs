@@ -45,7 +45,8 @@ namespace RoadsideService.Views.Crud
 
         public BookingCreateEditPage(Rooms room) : this()
         {
-            RoomComboBox.SelectedValue = room.RoomID;
+            _room = _context.Rooms.FirstOrDefault(u => u.RoomID == room.RoomID);
+            RoomComboBox.SelectedValue = _room.RoomID;
             RoomComboBox.IsEnabled = false;
             StatusComboBox.SelectedIndex = 0;
         }
@@ -86,13 +87,11 @@ namespace RoadsideService.Views.Crud
         }
         private void LoadPayments()
         {
-            if (_booking != null)
-            {
                 PaymentsDataGrid.ItemsSource = null;
-
                 PaymentsDataGrid.ItemsSource = _booking.Payments.ToList();
-            }
+
         }
+
         private void LoadBookingDetails()
         {
             if (_booking != null)
