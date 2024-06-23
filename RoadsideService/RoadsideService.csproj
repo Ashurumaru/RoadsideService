@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -59,6 +60,12 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Document.NET, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.3.0.0\lib\net40\Xceed.Document.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Words.NET, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.3.0.0\lib\net40\Xceed.Words.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -99,16 +106,10 @@
     <Compile Include="Data\Employees.cs">
       <DependentUpon>database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\Maintenance.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\PaymentMethods.cs">
       <DependentUpon>database.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Payments.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\PaymentStatus.cs">
       <DependentUpon>database.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Rooms.cs">
@@ -129,19 +130,14 @@
     <Compile Include="Data\Services.cs">
       <DependentUpon>database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\ServiceStatus.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Shifts.cs">
-      <DependentUpon>database.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\sysdiagrams.cs">
       <DependentUpon>database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeModel.cs" />
-    <Compile Include="Models\MaintenanceModel.cs" />
     <Compile Include="Models\ResidentModel.cs" />
+    <Compile Include="Models\RevenueModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
+    <Compile Include="Models\RoomOccupancyModel.cs" />
     <Compile Include="Models\ShiftModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Utils\StatusToColorConverter.cs" />
@@ -154,9 +150,6 @@
     <Compile Include="Views\Crud\EmployeeCreateEditPage.xaml.cs">
       <DependentUpon>EmployeeCreateEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Crud\MaintenanceCreateEditPage.xaml.cs">
-      <DependentUpon>MaintenanceCreateEditPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Crud\OrderCreateEditPage.xaml.cs">
       <DependentUpon>OrderCreateEditPage.xaml</DependentUpon>
     </Compile>
@@ -168,9 +161,6 @@
     </Compile>
     <Compile Include="Views\Crud\ServiceCreateEditPage.xaml.cs">
       <DependentUpon>ServiceCreateEditPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Crud\ShiftCreateEditPage.xaml.cs">
-      <DependentUpon>ShiftCreateEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -193,17 +183,26 @@
     <Compile Include="Views\Pages\EmployeeRolesManagementPage.xaml.cs">
       <DependentUpon>EmployeeRolesManagementPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\MaintenanceManagementPage.xaml.cs">
-      <DependentUpon>MaintenanceManagementPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Pages\MotelManagementPage.xaml.cs">
       <DependentUpon>MotelManagementPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ReportManagementPage.xaml.cs">
+      <DependentUpon>ReportManagementPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ServiceManagementPage.xaml.cs">
       <DependentUpon>ServiceManagementPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\ShiftManagementPage.xaml.cs">
-      <DependentUpon>ShiftManagementPage.xaml</DependentUpon>
+    <Compile Include="Views\Reports\BasePage.xaml.cs">
+      <DependentUpon>BasePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\BookingRevenueReportPage.xaml.cs">
+      <DependentUpon>BookingRevenueReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\RoomOccupancyReportPage.xaml.cs">
+      <DependentUpon>RoomOccupancyReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\ServiceRevenueReportPage.xaml.cs">
+      <DependentUpon>ServiceRevenueReportPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -257,10 +256,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Crud\MaintenanceCreateEditPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Crud\OrderCreateEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -274,10 +269,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Crud\ServiceCreateEditPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Crud\ShiftCreateEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -309,11 +300,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\MaintenanceManagementPage.xaml">
+    <Page Include="Views\Pages\MotelManagementPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\MotelManagementPage.xaml">
+    <Page Include="Views\Pages\ReportManagementPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -321,7 +312,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\ShiftManagementPage.xaml">
+    <Page Include="Views\Reports\BasePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\BookingRevenueReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\RoomOccupancyReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reports\ServiceRevenueReportPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -338,6 +341,7 @@
       <DependentUpon>database.edmx</DependentUpon>
       <LastGenOutput>database.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Images\logout_icon.png" />
     <Resource Include="Resources\Images\maximize.png" />
     <Resource Include="Resources\Images\close.png" />
     <Resource Include="Resources\Images\minimize_icon.png" />

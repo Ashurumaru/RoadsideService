@@ -29,8 +29,7 @@ namespace RoadsideService.Views.Crud
             {
                 RoleNameTextBox.Text = _role.RoleName;
                 DescriptionTextBox.Text = _role.Description;
-                HourlyRateTextBox.Text = _role.HourlyRate.ToString();
-                HighHourlyRateTextBox.Text = _role.HighHourlyRate.ToString();
+
             }
         }
 
@@ -44,8 +43,7 @@ namespace RoadsideService.Views.Crud
 
             _role.RoleName = RoleNameTextBox.Text;
             _role.Description = DescriptionTextBox.Text;
-            _role.HourlyRate = decimal.Parse(HourlyRateTextBox.Text);
-            _role.HighHourlyRate = decimal.Parse(HighHourlyRateTextBox.Text);
+
 
             _context.SaveChanges();
 

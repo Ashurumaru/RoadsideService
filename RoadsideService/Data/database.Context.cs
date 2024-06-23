@@ -30,18 +30,14 @@ namespace RoadsideService.Data
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<EmployeeRoles> EmployeeRoles { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<Maintenance> Maintenance { get; set; }
         public virtual DbSet<PaymentMethods> PaymentMethods { get; set; }
         public virtual DbSet<Payments> Payments { get; set; }
-        public virtual DbSet<PaymentStatus> PaymentStatus { get; set; }
         public virtual DbSet<Rooms> Rooms { get; set; }
         public virtual DbSet<RoomTypes> RoomTypes { get; set; }
         public virtual DbSet<ServiceOrderDetails> ServiceOrderDetails { get; set; }
         public virtual DbSet<ServiceOrders> ServiceOrders { get; set; }
         public virtual DbSet<ServicePayments> ServicePayments { get; set; }
         public virtual DbSet<Services> Services { get; set; }
-        public virtual DbSet<ServiceStatus> ServiceStatus { get; set; }
-        public virtual DbSet<Shifts> Shifts { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

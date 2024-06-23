@@ -307,10 +307,5 @@ namespace RoadsideService.Views.Pages
                 }
             }
         }
-
-        private void MaintenanceRoomButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new MaintenanceManagementPage());
-        }
     }
 }

@@ -1,19 +1,9 @@
 ﻿using RoadsideService.Data;
 using RoadsideService.Views.Crud;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RoadsideService.Views.Pages
 {
@@ -40,7 +30,6 @@ namespace RoadsideService.Views.Pages
                 clientsQuery = clientsQuery.Where(c => c.FirstName.Contains(searchTerm) ||
                                                        c.LastName.Contains(searchTerm) ||
                                                        c.MiddleName.Contains(searchTerm) ||
-                                                       c.Email.Contains(searchTerm) ||
                                                        c.Phone.Contains(searchTerm));
             }
 
@@ -84,6 +73,7 @@ namespace RoadsideService.Views.Pages
                 }
             }
         }
+
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchTerm = SearchTextBox.Text;

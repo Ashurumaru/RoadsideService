@@ -78,11 +78,6 @@ namespace RoadsideService.Views.Pages
             LoadEmployees(searchTerm);
         }
 
-        private void ShiftManagementShow_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ShiftManagementPage());
-        }
-
         private void RoleManagementShow_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new EmployeeRolesManagementPage());

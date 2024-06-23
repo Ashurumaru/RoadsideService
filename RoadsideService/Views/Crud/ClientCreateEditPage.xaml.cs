@@ -15,19 +15,12 @@ namespace RoadsideService.Views.Crud
         {
             InitializeComponent();
             _context = new RoadsideServiceEntities();
-            LoadGenderComboBox();
         }
 
         public ClientCreateEditPage(Customers client) : this()
         {
             _client = client;
             LoadClientDetails();
-        }
-
-        private void LoadGenderComboBox()
-        {
-            GenderComboBox.Items.Add(new ComboBoxItem { Content = "M" });
-            GenderComboBox.Items.Add(new ComboBoxItem { Content = "F" });
         }
 
         private void LoadClientDetails()
@@ -38,17 +31,6 @@ namespace RoadsideService.Views.Crud
                 MiddleNameTextBox.Text = _client.MiddleName;
                 LastNameTextBox.Text = _client.LastName;
                 PhoneTextBox.Text = _client.Phone;
-                EmailTextBox.Text = _client.Email;
-                DateOfBirthPicker.SelectedDate = _client.DateOfBirth;
-
-                foreach (ComboBoxItem item in GenderComboBox.Items)
-                {
-                    if (item.Content.ToString() == _client.Gender)
-                    {
-                        GenderComboBox.SelectedItem = item;
-                        break;
-                    }
-                }
             }
         }
 
@@ -64,13 +46,6 @@ namespace RoadsideService.Views.Crud
             _client.MiddleName = MiddleNameTextBox.Text;
             _client.LastName = LastNameTextBox.Text;
             _client.Phone = PhoneTextBox.Text;
-            _client.Email = EmailTextBox.Text;
-            _client.DateOfBirth = DateOfBirthPicker.SelectedDate;
-
-            if (GenderComboBox.SelectedItem != null)
-            {
-                _client.Gender = (GenderComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
-            }
 
             _context.SaveChanges();
 

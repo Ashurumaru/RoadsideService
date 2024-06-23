@@ -16,7 +16,6 @@ namespace RoadsideService.Views.Pages
             InitializeComponent();
             _context = new RoadsideServiceEntities();
             LoadCustomerFilter();
-            LoadStatusFilter();
             LoadServiceOrders();
         }
 
@@ -35,17 +34,6 @@ namespace RoadsideService.Views.Pages
             CustomerFilterComboBox.SelectedIndex = 0;
         }
 
-        private void LoadStatusFilter()
-        {
-            StatusFilterComboBox.Items.Add("Все");
-            var statuses = _context.ServiceStatus.Select(s => s.StatusName).ToList();
-            foreach (var status in statuses)
-            {
-                StatusFilterComboBox.Items.Add(status);
-            }
-            StatusFilterComboBox.SelectedIndex = 0;
-        }
-
         private void LoadServiceOrders()
         {
             var serviceOrders = _context.ServiceOrders
@@ -55,7 +43,6 @@ namespace RoadsideService.Views.Pages
                     o.CustomerName,
                     o.CustomerPhone,
                     o.OrderDate,
-                    StatusName = o.ServiceStatus.StatusName,
                     TotalPrice = o.ServiceOrderDetails.Sum(d => (decimal?)d.Services.Price) ?? 0
                 }).ToList()
                 .Select(o => new
@@ -64,7 +51,6 @@ namespace RoadsideService.Views.Pages
                     o.CustomerName,
                     o.CustomerPhone,
                     o.OrderDate,
-                    o.StatusName,
                     TotalPrice = $"{o.TotalPrice}"
                 }).ToList();
 
@@ -79,18 +65,12 @@ namespace RoadsideService.Views.Pages
         private void ApplyFilters()
         {
             string customerFilter = CustomerFilterComboBox.SelectedItem as string;
-            string statusFilter = StatusFilterComboBox.SelectedItem as string;
 
             var serviceOrdersQuery = _context.ServiceOrders.AsQueryable();
 
             if (customerFilter != "Все")
             {
                 serviceOrdersQuery = serviceOrdersQuery.Where(o => o.CustomerName == customerFilter);
-            }
-
-            if (statusFilter != "Все")
-            {
-                serviceOrdersQuery = serviceOrdersQuery.Where(o => o.ServiceStatus.StatusName == statusFilter);
             }
 
             var serviceOrders = serviceOrdersQuery
@@ -100,7 +80,6 @@ namespace RoadsideService.Views.Pages
                     o.CustomerName,
                     o.CustomerPhone,
                     o.OrderDate,
-                    StatusName = o.ServiceStatus.StatusName,
                     TotalPrice = o.ServiceOrderDetails.Sum(d => (decimal?)d.Services.Price) ?? 0
                 }).ToList()
                 .Select(o => new
@@ -109,7 +88,6 @@ namespace RoadsideService.Views.Pages
                     o.CustomerName,
                     o.CustomerPhone,
                     o.OrderDate,
-                    o.StatusName,
                     TotalPrice = $"{o.TotalPrice}"
                 }).ToList();
 

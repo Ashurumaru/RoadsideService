@@ -33,19 +33,14 @@ namespace RoadsideService.Views
 
                 if (user != null)
                 {
-                    UserModel currentUser = new UserModel
-                    {
-                        EmployeeId = user.EmployeeID,
-                        FirstName = user.FirstName,
-                        MiddleName = user.MiddleName,
-                        LastName = user.LastName,
-                        Email = user.Email,
-                        Phone = user.Phone,
-                        RoleId = user.RoleID,
-                        HireDate = user.HireDate,
-                        Login = user.Login,
-                        Password = user.Password
-                    };
+
+                    UserModel.EmployeeId = user.EmployeeID;
+                    UserModel.FirstName = user.FirstName;
+                    UserModel.MiddleName = user.MiddleName;
+                    UserModel.LastName = user.LastName;
+                    UserModel.Email = user.Email;
+                    UserModel.RoleId = user.RoleID;
+
 
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();

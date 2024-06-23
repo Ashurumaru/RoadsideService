@@ -174,7 +174,6 @@ namespace RoadsideService.Views.Crud
                 PaymentDate = PaymentDatePicker.SelectedDate ?? DateTime.Now,
                 Amount = decimal.Parse(PaymentAmountTextBox.Text),
                 PaymentMethodID = (int)PaymentMethodComboBox.SelectedValue,
-                PaymentStatusID = 1
             };
             _context.Payments.Add(payment);
             _context.SaveChanges();

@@ -24,8 +24,6 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
                 <Label Content="Фильтр по клиенту:" VerticalAlignment="Center"/>
                 <ComboBox x:Name="CustomerFilterComboBox" Width="150" Margin="0,0,10,0" SelectionChanged="FilterComboBox_SelectionChanged"/>
-                <Label Content="Фильтр по статусу:" VerticalAlignment="Center"/>
-                <ComboBox x:Name="StatusFilterComboBox" Width="150" Margin="0,0,10,0" SelectionChanged="FilterComboBox_SelectionChanged"/>
             </StackPanel>
         </StackPanel>
 
@@ -34,7 +32,6 @@
                 <DataGridTextColumn Header="Клиент" Binding="{Binding CustomerName}" Width="150"/>
                 <DataGridTextColumn Header="Телефон" Binding="{Binding CustomerPhone}" Width="150"/>
                 <DataGridTextColumn Header="Дата заказа" Binding="{Binding OrderDate, StringFormat={}{0:dd/MM/yyyy}}" Width="120"/>
-                <DataGridTextColumn Header="Статус" Binding="{Binding StatusName}" Width="130"/>
                 <DataGridTextColumn Header="Общая стоимость" Binding="{Binding TotalPrice, StringFormat={}{0} ₽}" Width="150"/>
                 <DataGridTemplateColumn Header="Действия" Width="*">
                     <DataGridTemplateColumn.CellTemplate>

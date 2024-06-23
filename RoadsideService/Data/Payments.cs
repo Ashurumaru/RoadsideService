@@ -19,10 +19,8 @@ namespace RoadsideService.Data
         public System.DateTime PaymentDate { get; set; }
         public decimal Amount { get; set; }
         public int PaymentMethodID { get; set; }
-        public int PaymentStatusID { get; set; }
     
         public virtual Bookings Bookings { get; set; }
         public virtual PaymentMethods PaymentMethods { get; set; }
-        public virtual PaymentStatus PaymentStatus { get; set; }
     }
 }

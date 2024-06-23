@@ -6,9 +6,6 @@ using System.Windows.Controls;
 
 namespace RoadsideService.Views.Crud
 {
-    /// <summary>
-    /// Логика взаимодействия для OrderCreateEditPage.xaml
-    /// </summary>
     public partial class OrderCreateEditPage : Page
     {
         private RoadsideServiceEntities _context;
@@ -19,10 +16,8 @@ namespace RoadsideService.Views.Crud
         {
             InitializeComponent();
             _context = new RoadsideServiceEntities();
-            LoadStatuses();
             LoadServices();
             LoadPaymentMethods();
-            LoadPaymentStatuses();
         }
 
         public OrderCreateEditPage(ServiceOrders serviceOrder) : this()
@@ -30,13 +25,6 @@ namespace RoadsideService.Views.Crud
             _serviceOrder = serviceOrder;
             LoadServiceOrderDetails();
             LoadPayments();
-        }
-
-        private void LoadStatuses()
-        {
-            StatusComboBox.ItemsSource = _context.ServiceStatus.ToList();
-            StatusComboBox.DisplayMemberPath = "StatusName";
-            StatusComboBox.SelectedValuePath = "ServiceStatusID";
         }
 
         private void LoadServices()
@@ -53,13 +41,6 @@ namespace RoadsideService.Views.Crud
             PaymentMethodComboBox.SelectedValuePath = "PaymentMethodID";
         }
 
-        private void LoadPaymentStatuses()
-        {
-            PaymentStatusComboBox.ItemsSource = _context.PaymentStatus.ToList();
-            PaymentStatusComboBox.DisplayMemberPath = "StatusName";
-            PaymentStatusComboBox.SelectedValuePath = "PaymentStatusID";
-        }
-
         private void LoadServiceOrderDetails()
         {
             if (_serviceOrder != null)
@@ -67,8 +48,6 @@ namespace RoadsideService.Views.Crud
                 CustomerNameTextBox.Text = _serviceOrder.CustomerName;
                 CustomerPhoneTextBox.Text = _serviceOrder.CustomerPhone;
                 OrderDatePicker.SelectedDate = _serviceOrder.OrderDate;
-                StatusComboBox.SelectedValue = _serviceOrder.StatusID;
-                TotalPriceTextBox.Text = _serviceOrder.ServiceOrderDetails.Sum(detail => detail.Services.Price).ToString("F2");
 
                 var serviceOrderDetails = _context.ServiceOrderDetails
                     .Where(d => d.OrderID == _serviceOrder.OrderID)
@@ -80,6 +59,8 @@ namespace RoadsideService.Views.Crud
                     }).ToList();
 
                 ServiceOrderDetailsDataGrid.ItemsSource = serviceOrderDetails;
+                UpdateTotalPrice();
+                UpdateRemainingPayment();
             }
         }
 
@@ -94,11 +75,12 @@ namespace RoadsideService.Views.Crud
                         p.PaymentID,
                         p.PaymentDate,
                         p.Amount,
-                        MethodName = p.PaymentMethods.MethodName,
-                        StatusName = p.PaymentStatus.StatusName
+                        MethodName = p.PaymentMethods.MethodName
                     }).ToList();
 
                 PaymentsDataGrid.ItemsSource = payments;
+                UpdateTotalPayment();
+                UpdateRemainingPayment();
             }
         }
 
@@ -113,7 +95,6 @@ namespace RoadsideService.Views.Crud
             _serviceOrder.CustomerName = CustomerNameTextBox.Text;
             _serviceOrder.CustomerPhone = CustomerPhoneTextBox.Text;
             _serviceOrder.OrderDate = (DateTime)OrderDatePicker.SelectedDate;
-            _serviceOrder.StatusID = (int)StatusComboBox.SelectedValue;
 
             _context.SaveChanges();
         }
@@ -174,8 +155,7 @@ namespace RoadsideService.Views.Crud
                 AppointmentID = _serviceOrder.OrderID,
                 PaymentDate = PaymentDatePicker.SelectedDate ?? DateTime.Now,
                 Amount = decimal.Parse(PaymentAmountTextBox.Text),
-                PaymentMethodID = (int)PaymentMethodComboBox.SelectedValue,
-                PaymentStatusID = (int)PaymentStatusComboBox.SelectedValue
+                PaymentMethodID = (int)PaymentMethodComboBox.SelectedValue
             };
             _context.ServicePayments.Add(payment);
             _context.SaveChanges();
@@ -193,7 +173,6 @@ namespace RoadsideService.Views.Crud
                 PaymentAmountTextBox.Text = _selectedPayment.Amount.ToString("F2");
                 PaymentDatePicker.SelectedDate = _selectedPayment.PaymentDate;
                 PaymentMethodComboBox.SelectedValue = _selectedPayment.PaymentMethodID;
-                PaymentStatusComboBox.SelectedValue = _selectedPayment.PaymentStatusID;
             }
         }
 
@@ -212,6 +191,47 @@ namespace RoadsideService.Views.Crud
                     _context.SaveChanges();
                     LoadPayments();
                 }
+            }
+        }
+
+        private void UpdateTotalPrice()
+        {
+            if (_serviceOrder != null)
+            {
+                var total = _context.ServiceOrderDetails
+                    .Where(d => d.OrderID == _serviceOrder.OrderID)
+                    .Sum(d => d.Services.Price);
+
+                TotalPriceTextBox.Text = total.ToString("F2");
+            }
+        }
+
+        private void UpdateTotalPayment()
+        {
+            if (_serviceOrder != null)
+            {
+                var totalPayment = _context.ServicePayments
+                    .Where(p => p.AppointmentID == _serviceOrder.OrderID)
+                    .Sum(p => p.Amount);
+
+                TotalPaymentTextBlock.Text = totalPayment.ToString("F2") + " ₽";
+            }
+        }
+
+        private void UpdateRemainingPayment()
+        {
+            if (_serviceOrder != null)
+            {
+                var total = _context.ServiceOrderDetails
+                    .Where(d => d.OrderID == _serviceOrder.OrderID)
+                    .Sum(d => d.Services.Price);
+
+                var totalPayment = _context.ServicePayments
+                    .Where(p => p.AppointmentID == _serviceOrder.OrderID)
+                    .Sum(p => p.Amount);
+
+                var remainingPayment = total - totalPayment;
+                RemainingPaymentTextBlock.Text = remainingPayment.ToString("F2") + " ₽";
             }
         }
     }

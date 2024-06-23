@@ -14,13 +14,6 @@ namespace RoadsideService.Data
     
     public partial class Employees
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employees()
-        {
-            this.Maintenance = new HashSet<Maintenance>();
-            this.Shifts = new HashSet<Shifts>();
-        }
-    
         public int EmployeeID { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -33,9 +26,5 @@ namespace RoadsideService.Data
         public string Password { get; set; }
     
         public virtual EmployeeRoles EmployeeRoles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Maintenance> Maintenance { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Shifts> Shifts { get; set; }
     }
 }

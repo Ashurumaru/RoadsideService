@@ -25,15 +25,6 @@
 
             <Label Content="Телефон:"/>
             <TextBox x:Name="PhoneTextBox"/>
-
-            <Label Content="Эл. почта:"/>
-            <TextBox x:Name="EmailTextBox"/>
-
-            <Label Content="Дата рождения:"/>
-            <DatePicker x:Name="DateOfBirthPicker"/>
-
-            <Label Content="Пол:"/>
-            <ComboBox x:Name="GenderComboBox"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10">

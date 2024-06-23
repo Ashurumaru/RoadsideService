@@ -25,11 +25,9 @@ namespace RoadsideService.Data
         public string CustomerName { get; set; }
         public string CustomerPhone { get; set; }
         public System.DateTime OrderDate { get; set; }
-        public int StatusID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServiceOrderDetails> ServiceOrderDetails { get; set; }
-        public virtual ServiceStatus ServiceStatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServicePayments> ServicePayments { get; set; }
     }

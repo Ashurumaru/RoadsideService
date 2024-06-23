@@ -18,7 +18,6 @@ namespace RoadsideService.Data
         public Rooms()
         {
             this.Bookings = new HashSet<Bookings>();
-            this.Maintenance = new HashSet<Maintenance>();
         }
     
         public int RoomID { get; set; }
@@ -30,8 +29,6 @@ namespace RoadsideService.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bookings> Bookings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Maintenance> Maintenance { get; set; }
         public virtual RoomTypes RoomTypes { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using RoadsideService.Views.Pages;
+﻿using RoadsideService.Models;
+using RoadsideService.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,13 @@ namespace RoadsideService.Views
         public MainWindow()
         {
             InitializeComponent();
-        }
-        private void OrdersPage_Click(object sender, RoutedEventArgs e)
-        {
-            //PagesNavigation.Navigate(new OrdersPage());
+            txblName.Text = UserModel.GetFullName();
+            txblEmail.Text =UserModel.Email;
+
+            if (UserModel.RoleId != 3)
+            {
+                btnEmployeePage.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void MotelPage_Click(object sender, RoutedEventArgs e)
@@ -39,10 +43,6 @@ namespace RoadsideService.Views
             PagesNavigation.Navigate(new AutoServiceManagementPage());
         }
 
-        private void RoomMotelPage_Click(object sender, RoutedEventArgs e)
-        {
-            //PagesNavigation.Navigate(new RoomManagementPage());
-        }
 
         private void CustomerPage_Click(object sender, RoutedEventArgs e)
         {
@@ -54,14 +54,9 @@ namespace RoadsideService.Views
             PagesNavigation.Navigate(new EmployeeManagementPage());
         }
 
-        private void PersonalAccountPage_Click(object sender, RoutedEventArgs e)
-        {
-            //PagesNavigation.Navigate(new PersonalAccountPage());
-        }
-
         private void ReportPage_Click(object sender, RoutedEventArgs e)
         {
-            //PagesNavigation.Navigate(new ReportPage());
+            PagesNavigation.Navigate(new ReportManagementPage());
         }
         private void btn_close_Click(object sender, RoutedEventArgs e)
         {
@@ -112,6 +107,11 @@ namespace RoadsideService.Views
             else RestoreWindow();
         }
 
-
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+        }
     }
 }

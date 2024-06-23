@@ -33,10 +33,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
-          <Property Name="DateOfBirth" Type="date" />
-          <Property Name="Gender" Type="char" MaxLength="1" />
         </EntityType>
         <EntityType Name="EmployeeRoles">
           <Key>
@@ -45,8 +42,6 @@
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" />
-          <Property Name="HourlyRate" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="HighHourlyRate" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -62,17 +57,6 @@
           <Property Name="HireDate" Type="date" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Maintenance">
-          <Key>
-            <PropertyRef Name="MaintenanceID" />
-          </Key>
-          <Property Name="MaintenanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoomID" Type="int" Nullable="false" />
-          <Property Name="EmployeeID" Type="int" Nullable="false" />
-          <Property Name="MaintenanceDate" Type="date" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="255" />
-          <Property Name="Cost" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="PaymentMethods">
           <Key>
@@ -90,14 +74,6 @@
           <Property Name="PaymentDate" Type="date" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="PaymentMethodID" Type="int" Nullable="false" />
-          <Property Name="PaymentStatusID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PaymentStatus">
-          <Key>
-            <PropertyRef Name="PaymentStatusID" />
-          </Key>
-          <Property Name="PaymentStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Rooms">
           <Key>
@@ -135,7 +111,6 @@
           <Property Name="CustomerName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CustomerPhone" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="OrderDate" Type="date" Nullable="false" />
-          <Property Name="StatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ServicePayments">
           <Key>
@@ -146,7 +121,6 @@
           <Property Name="PaymentDate" Type="date" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="PaymentMethodID" Type="int" Nullable="false" />
-          <Property Name="PaymentStatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Services">
           <Key>
@@ -157,24 +131,6 @@
           <Property Name="Description" Type="nvarchar" MaxLength="255" />
           <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Duration" Type="int" />
-        </EntityType>
-        <EntityType Name="ServiceStatus">
-          <Key>
-            <PropertyRef Name="ServiceStatusID" />
-          </Key>
-          <Property Name="ServiceStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Shifts">
-          <Key>
-            <PropertyRef Name="ShiftID" />
-          </Key>
-          <Property Name="ShiftID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmployeeID" Type="int" Nullable="false" />
-          <Property Name="ShiftDate" Type="date" Nullable="false" />
-          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
-          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
-          <Property Name="IsHoliday" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -222,30 +178,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Maintenan__Emplo__236943A5">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
-          <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="Maintenance">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Maintenan__RoomI__22751F6C">
-          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
-          <End Role="Maintenance" Type="Self.Maintenance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rooms">
-              <PropertyRef Name="RoomID" />
-            </Principal>
-            <Dependent Role="Maintenance">
-              <PropertyRef Name="RoomID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Payments__Bookin__0B91BA14">
           <End Role="Bookings" Type="Self.Bookings" Multiplicity="1" />
           <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
@@ -270,18 +202,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Payments__Paymen__0D7A0286">
-          <End Role="PaymentStatus" Type="Self.PaymentStatus" Multiplicity="1" />
-          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaymentStatus">
-              <PropertyRef Name="PaymentStatusID" />
-            </Principal>
-            <Dependent Role="Payments">
-              <PropertyRef Name="PaymentStatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Rooms__RoomTypeI__7F2BE32F">
           <End Role="RoomTypes" Type="Self.RoomTypes" Multiplicity="1" />
           <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
@@ -303,18 +223,6 @@
             </Principal>
             <Dependent Role="ServiceOrderDetails">
               <PropertyRef Name="OrderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ServiceAp__Servi__1AD3FDA4">
-          <End Role="ServiceStatus" Type="Self.ServiceStatus" Multiplicity="1" />
-          <End Role="ServiceOrders" Type="Self.ServiceOrders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ServiceStatus">
-              <PropertyRef Name="ServiceStatusID" />
-            </Principal>
-            <Dependent Role="ServiceOrders">
-              <PropertyRef Name="StatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -354,30 +262,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ServicePa__Payme__1F98B2C1">
-          <End Role="PaymentStatus" Type="Self.PaymentStatus" Multiplicity="1" />
-          <End Role="ServicePayments" Type="Self.ServicePayments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaymentStatus">
-              <PropertyRef Name="PaymentStatusID" />
-            </Principal>
-            <Dependent Role="ServicePayments">
-              <PropertyRef Name="PaymentStatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Shifts__Employee__2645B050">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
-          <End Role="Shifts" Type="Self.Shifts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="Shifts">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Bookings_Customers">
           <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
           <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
@@ -396,18 +280,14 @@
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeRoles" EntityType="Self.EmployeeRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Maintenance" EntityType="Self.Maintenance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PaymentStatus" EntityType="Self.PaymentStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoomTypes" EntityType="Self.RoomTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceOrderDetails" EntityType="Self.ServiceOrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceOrders" EntityType="Self.ServiceOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServicePayments" EntityType="Self.ServicePayments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ServiceStatus" EntityType="Self.ServiceStatus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Shifts" EntityType="Self.Shifts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Bookings__RoomID__03F0984C" Association="Self.FK__Bookings__RoomID__03F0984C">
             <End Role="Rooms" EntitySet="Rooms" />
@@ -421,24 +301,12 @@
             <End Role="EmployeeRoles" EntitySet="EmployeeRoles" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__Maintenan__Emplo__236943A5" Association="Self.FK__Maintenan__Emplo__236943A5">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Maintenance" EntitySet="Maintenance" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Maintenan__RoomI__22751F6C" Association="Self.FK__Maintenan__RoomI__22751F6C">
-            <End Role="Rooms" EntitySet="Rooms" />
-            <End Role="Maintenance" EntitySet="Maintenance" />
-          </AssociationSet>
           <AssociationSet Name="FK__Payments__Bookin__0B91BA14" Association="Self.FK__Payments__Bookin__0B91BA14">
             <End Role="Bookings" EntitySet="Bookings" />
             <End Role="Payments" EntitySet="Payments" />
           </AssociationSet>
           <AssociationSet Name="FK__Payments__Paymen__0C85DE4D" Association="Self.FK__Payments__Paymen__0C85DE4D">
             <End Role="PaymentMethods" EntitySet="PaymentMethods" />
-            <End Role="Payments" EntitySet="Payments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Payments__Paymen__0D7A0286" Association="Self.FK__Payments__Paymen__0D7A0286">
-            <End Role="PaymentStatus" EntitySet="PaymentStatus" />
             <End Role="Payments" EntitySet="Payments" />
           </AssociationSet>
           <AssociationSet Name="FK__Rooms__RoomTypeI__7F2BE32F" Association="Self.FK__Rooms__RoomTypeI__7F2BE32F">
@@ -448,10 +316,6 @@
           <AssociationSet Name="FK__ServiceAp__Appoi__3864608B" Association="Self.FK__ServiceAp__Appoi__3864608B">
             <End Role="ServiceOrders" EntitySet="ServiceOrders" />
             <End Role="ServiceOrderDetails" EntitySet="ServiceOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ServiceAp__Servi__1AD3FDA4" Association="Self.FK__ServiceAp__Servi__1AD3FDA4">
-            <End Role="ServiceStatus" EntitySet="ServiceStatus" />
-            <End Role="ServiceOrders" EntitySet="ServiceOrders" />
           </AssociationSet>
           <AssociationSet Name="FK__ServiceAp__Servi__395884C4" Association="Self.FK__ServiceAp__Servi__395884C4">
             <End Role="Services" EntitySet="Services" />
@@ -464,14 +328,6 @@
           <AssociationSet Name="FK__ServicePa__Payme__1EA48E88" Association="Self.FK__ServicePa__Payme__1EA48E88">
             <End Role="PaymentMethods" EntitySet="PaymentMethods" />
             <End Role="ServicePayments" EntitySet="ServicePayments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ServicePa__Payme__1F98B2C1" Association="Self.FK__ServicePa__Payme__1F98B2C1">
-            <End Role="PaymentStatus" EntitySet="PaymentStatus" />
-            <End Role="ServicePayments" EntitySet="ServicePayments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Shifts__Employee__2645B050" Association="Self.FK__Shifts__Employee__2645B050">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Shifts" EntitySet="Shifts" />
           </AssociationSet>
           <AssociationSet Name="FK_Bookings_Customers" Association="Self.FK_Bookings_Customers">
             <End Role="Customers" EntitySet="Customers" />
@@ -488,18 +344,14 @@
           <EntitySet Name="Customers" EntityType="RoadsideServiceModel.Customers" />
           <EntitySet Name="EmployeeRoles" EntityType="RoadsideServiceModel.EmployeeRoles" />
           <EntitySet Name="Employees" EntityType="RoadsideServiceModel.Employees" />
-          <EntitySet Name="Maintenance" EntityType="RoadsideServiceModel.Maintenance" />
           <EntitySet Name="PaymentMethods" EntityType="RoadsideServiceModel.PaymentMethods" />
           <EntitySet Name="Payments" EntityType="RoadsideServiceModel.Payments" />
-          <EntitySet Name="PaymentStatus" EntityType="RoadsideServiceModel.PaymentStatus" />
           <EntitySet Name="Rooms" EntityType="RoadsideServiceModel.Rooms" />
           <EntitySet Name="RoomTypes" EntityType="RoadsideServiceModel.RoomTypes" />
           <EntitySet Name="ServiceOrderDetails" EntityType="RoadsideServiceModel.ServiceOrderDetails" />
           <EntitySet Name="ServiceOrders" EntityType="RoadsideServiceModel.ServiceOrders" />
           <EntitySet Name="ServicePayments" EntityType="RoadsideServiceModel.ServicePayments" />
           <EntitySet Name="Services" EntityType="RoadsideServiceModel.Services" />
-          <EntitySet Name="ServiceStatus" EntityType="RoadsideServiceModel.ServiceStatus" />
-          <EntitySet Name="Shifts" EntityType="RoadsideServiceModel.Shifts" />
           <EntitySet Name="sysdiagrams" EntityType="RoadsideServiceModel.sysdiagrams" />
           <AssociationSet Name="FK__Bookings__RoomID__03F0984C" Association="RoadsideServiceModel.FK__Bookings__RoomID__03F0984C">
             <End Role="Rooms" EntitySet="Rooms" />
@@ -521,32 +373,12 @@
             <End Role="EmployeeRoles" EntitySet="EmployeeRoles" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__Maintenan__Emplo__236943A5" Association="RoadsideServiceModel.FK__Maintenan__Emplo__236943A5">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Maintenance" EntitySet="Maintenance" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Shifts__Employee__2645B050" Association="RoadsideServiceModel.FK__Shifts__Employee__2645B050">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Shifts" EntitySet="Shifts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Maintenan__RoomI__22751F6C" Association="RoadsideServiceModel.FK__Maintenan__RoomI__22751F6C">
-            <End Role="Rooms" EntitySet="Rooms" />
-            <End Role="Maintenance" EntitySet="Maintenance" />
-          </AssociationSet>
           <AssociationSet Name="FK__Payments__Paymen__0C85DE4D" Association="RoadsideServiceModel.FK__Payments__Paymen__0C85DE4D">
             <End Role="PaymentMethods" EntitySet="PaymentMethods" />
             <End Role="Payments" EntitySet="Payments" />
           </AssociationSet>
           <AssociationSet Name="FK__ServicePa__Payme__1EA48E88" Association="RoadsideServiceModel.FK__ServicePa__Payme__1EA48E88">
             <End Role="PaymentMethods" EntitySet="PaymentMethods" />
-            <End Role="ServicePayments" EntitySet="ServicePayments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Payments__Paymen__0D7A0286" Association="RoadsideServiceModel.FK__Payments__Paymen__0D7A0286">
-            <End Role="PaymentStatus" EntitySet="PaymentStatus" />
-            <End Role="Payments" EntitySet="Payments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ServicePa__Payme__1F98B2C1" Association="RoadsideServiceModel.FK__ServicePa__Payme__1F98B2C1">
-            <End Role="PaymentStatus" EntitySet="PaymentStatus" />
             <End Role="ServicePayments" EntitySet="ServicePayments" />
           </AssociationSet>
           <AssociationSet Name="FK__Rooms__RoomTypeI__7F2BE32F" Association="RoadsideServiceModel.FK__Rooms__RoomTypeI__7F2BE32F">
@@ -560,10 +392,6 @@
           <AssociationSet Name="FK__ServiceAp__Servi__395884C4" Association="RoadsideServiceModel.FK__ServiceAp__Servi__395884C4">
             <End Role="Services" EntitySet="Services" />
             <End Role="ServiceOrderDetails" EntitySet="ServiceOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ServiceAp__Servi__1AD3FDA4" Association="RoadsideServiceModel.FK__ServiceAp__Servi__1AD3FDA4">
-            <End Role="ServiceStatus" EntitySet="ServiceStatus" />
-            <End Role="ServiceOrders" EntitySet="ServiceOrders" />
           </AssociationSet>
           <AssociationSet Name="FK__ServicePa__Appoi__1DB06A4F" Association="RoadsideServiceModel.FK__ServicePa__Appoi__1DB06A4F">
             <End Role="ServiceOrders" EntitySet="ServiceOrders" />
@@ -603,10 +431,7 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Bookings" Relationship="RoadsideServiceModel.FK_Bookings_Customers" FromRole="Customers" ToRole="Bookings" />
         </EntityType>
         <EntityType Name="EmployeeRoles">
@@ -616,8 +441,6 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="HourlyRate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="HighHourlyRate" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="Employees" Relationship="RoadsideServiceModel.FK__Employees__RoleI__160F4887" FromRole="EmployeeRoles" ToRole="Employees" />
         </EntityType>
         <EntityType Name="Employees">
@@ -635,21 +458,6 @@
           <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EmployeeRoles" Relationship="RoadsideServiceModel.FK__Employees__RoleI__160F4887" FromRole="Employees" ToRole="EmployeeRoles" />
-          <NavigationProperty Name="Maintenance" Relationship="RoadsideServiceModel.FK__Maintenan__Emplo__236943A5" FromRole="Employees" ToRole="Maintenance" />
-          <NavigationProperty Name="Shifts" Relationship="RoadsideServiceModel.FK__Shifts__Employee__2645B050" FromRole="Employees" ToRole="Shifts" />
-        </EntityType>
-        <EntityType Name="Maintenance">
-          <Key>
-            <PropertyRef Name="MaintenanceID" />
-          </Key>
-          <Property Name="MaintenanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoomID" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-          <Property Name="MaintenanceDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Cost" Type="Decimal" Precision="10" Scale="2" />
-          <NavigationProperty Name="Employees" Relationship="RoadsideServiceModel.FK__Maintenan__Emplo__236943A5" FromRole="Maintenance" ToRole="Employees" />
-          <NavigationProperty Name="Rooms" Relationship="RoadsideServiceModel.FK__Maintenan__RoomI__22751F6C" FromRole="Maintenance" ToRole="Rooms" />
         </EntityType>
         <EntityType Name="PaymentMethods">
           <Key>
@@ -669,19 +477,8 @@
           <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="PaymentMethodID" Type="Int32" Nullable="false" />
-          <Property Name="PaymentStatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Bookings" Relationship="RoadsideServiceModel.FK__Payments__Bookin__0B91BA14" FromRole="Payments" ToRole="Bookings" />
           <NavigationProperty Name="PaymentMethods" Relationship="RoadsideServiceModel.FK__Payments__Paymen__0C85DE4D" FromRole="Payments" ToRole="PaymentMethods" />
-          <NavigationProperty Name="PaymentStatus" Relationship="RoadsideServiceModel.FK__Payments__Paymen__0D7A0286" FromRole="Payments" ToRole="PaymentStatus" />
-        </EntityType>
-        <EntityType Name="PaymentStatus">
-          <Key>
-            <PropertyRef Name="PaymentStatusID" />
-          </Key>
-          <Property Name="PaymentStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Payments" Relationship="RoadsideServiceModel.FK__Payments__Paymen__0D7A0286" FromRole="PaymentStatus" ToRole="Payments" />
-          <NavigationProperty Name="ServicePayments" Relationship="RoadsideServiceModel.FK__ServicePa__Payme__1F98B2C1" FromRole="PaymentStatus" ToRole="ServicePayments" />
         </EntityType>
         <EntityType Name="Rooms">
           <Key>
@@ -694,7 +491,6 @@
           <Property Name="MaxOccupancy" Type="Int32" Nullable="false" />
           <Property Name="IsCleaning" Type="Boolean" />
           <NavigationProperty Name="Bookings" Relationship="RoadsideServiceModel.FK__Bookings__RoomID__03F0984C" FromRole="Rooms" ToRole="Bookings" />
-          <NavigationProperty Name="Maintenance" Relationship="RoadsideServiceModel.FK__Maintenan__RoomI__22751F6C" FromRole="Rooms" ToRole="Maintenance" />
           <NavigationProperty Name="RoomTypes" Relationship="RoadsideServiceModel.FK__Rooms__RoomTypeI__7F2BE32F" FromRole="Rooms" ToRole="RoomTypes" />
         </EntityType>
         <EntityType Name="RoomTypes">
@@ -725,9 +521,7 @@
           <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CustomerPhone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="StatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ServiceOrderDetails" Relationship="RoadsideServiceModel.FK__ServiceAp__Appoi__3864608B" FromRole="ServiceOrders" ToRole="ServiceOrderDetails" />
-          <NavigationProperty Name="ServiceStatus" Relationship="RoadsideServiceModel.FK__ServiceAp__Servi__1AD3FDA4" FromRole="ServiceOrders" ToRole="ServiceStatus" />
           <NavigationProperty Name="ServicePayments" Relationship="RoadsideServiceModel.FK__ServicePa__Appoi__1DB06A4F" FromRole="ServiceOrders" ToRole="ServicePayments" />
         </EntityType>
         <EntityType Name="ServicePayments">
@@ -739,9 +533,7 @@
           <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="PaymentMethodID" Type="Int32" Nullable="false" />
-          <Property Name="PaymentStatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PaymentMethods" Relationship="RoadsideServiceModel.FK__ServicePa__Payme__1EA48E88" FromRole="ServicePayments" ToRole="PaymentMethods" />
-          <NavigationProperty Name="PaymentStatus" Relationship="RoadsideServiceModel.FK__ServicePa__Payme__1F98B2C1" FromRole="ServicePayments" ToRole="PaymentStatus" />
           <NavigationProperty Name="ServiceOrders" Relationship="RoadsideServiceModel.FK__ServicePa__Appoi__1DB06A4F" FromRole="ServicePayments" ToRole="ServiceOrders" />
         </EntityType>
         <EntityType Name="Services">
@@ -754,26 +546,6 @@
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="Duration" Type="Int32" />
           <NavigationProperty Name="ServiceOrderDetails" Relationship="RoadsideServiceModel.FK__ServiceAp__Servi__395884C4" FromRole="Services" ToRole="ServiceOrderDetails" />
-        </EntityType>
-        <EntityType Name="ServiceStatus">
-          <Key>
-            <PropertyRef Name="ServiceStatusID" />
-          </Key>
-          <Property Name="ServiceStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StatusName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ServiceOrders" Relationship="RoadsideServiceModel.FK__ServiceAp__Servi__1AD3FDA4" FromRole="ServiceStatus" ToRole="ServiceOrders" />
-        </EntityType>
-        <EntityType Name="Shifts">
-          <Key>
-            <PropertyRef Name="ShiftID" />
-          </Key>
-          <Property Name="ShiftID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-          <Property Name="ShiftDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="IsHoliday" Type="Boolean" />
-          <NavigationProperty Name="Employees" Relationship="RoadsideServiceModel.FK__Shifts__Employee__2645B050" FromRole="Shifts" ToRole="Employees" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -845,42 +617,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Maintenan__Emplo__236943A5">
-          <End Type="RoadsideServiceModel.Employees" Role="Employees" Multiplicity="1" />
-          <End Type="RoadsideServiceModel.Maintenance" Role="Maintenance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="Maintenance">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Shifts__Employee__2645B050">
-          <End Type="RoadsideServiceModel.Employees" Role="Employees" Multiplicity="1" />
-          <End Type="RoadsideServiceModel.Shifts" Role="Shifts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="Shifts">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Maintenan__RoomI__22751F6C">
-          <End Type="RoadsideServiceModel.Rooms" Role="Rooms" Multiplicity="1" />
-          <End Type="RoadsideServiceModel.Maintenance" Role="Maintenance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rooms">
-              <PropertyRef Name="RoomID" />
-            </Principal>
-            <Dependent Role="Maintenance">
-              <PropertyRef Name="RoomID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Payments__Paymen__0C85DE4D">
           <End Type="RoadsideServiceModel.PaymentMethods" Role="PaymentMethods" Multiplicity="1" />
           <End Type="RoadsideServiceModel.Payments" Role="Payments" Multiplicity="*" />
@@ -902,30 +638,6 @@
             </Principal>
             <Dependent Role="ServicePayments">
               <PropertyRef Name="PaymentMethodID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Payments__Paymen__0D7A0286">
-          <End Type="RoadsideServiceModel.PaymentStatus" Role="PaymentStatus" Multiplicity="1" />
-          <End Type="RoadsideServiceModel.Payments" Role="Payments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaymentStatus">
-              <PropertyRef Name="PaymentStatusID" />
-            </Principal>
-            <Dependent Role="Payments">
-              <PropertyRef Name="PaymentStatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ServicePa__Payme__1F98B2C1">
-          <End Type="RoadsideServiceModel.PaymentStatus" Role="PaymentStatus" Multiplicity="1" />
-          <End Type="RoadsideServiceModel.ServicePayments" Role="ServicePayments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaymentStatus">
-              <PropertyRef Name="PaymentStatusID" />
-            </Principal>
-            <Dependent Role="ServicePayments">
-              <PropertyRef Name="PaymentStatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -962,18 +674,6 @@
             </Principal>
             <Dependent Role="ServiceOrderDetails">
               <PropertyRef Name="ServiceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ServiceAp__Servi__1AD3FDA4">
-          <End Type="RoadsideServiceModel.ServiceStatus" Role="ServiceStatus" Multiplicity="1" />
-          <End Type="RoadsideServiceModel.ServiceOrders" Role="ServiceOrders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ServiceStatus">
-              <PropertyRef Name="ServiceStatusID" />
-            </Principal>
-            <Dependent Role="ServiceOrders">
-              <PropertyRef Name="StatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1020,10 +720,7 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="RoadsideServiceModel.Customers">
               <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -1034,8 +731,6 @@
           <EntitySetMapping Name="EmployeeRoles">
             <EntityTypeMapping TypeName="RoadsideServiceModel.EmployeeRoles">
               <MappingFragment StoreEntitySet="EmployeeRoles">
-                <ScalarProperty Name="HighHourlyRate" ColumnName="HighHourlyRate" />
-                <ScalarProperty Name="HourlyRate" ColumnName="HourlyRate" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
@@ -1058,18 +753,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Maintenance">
-            <EntityTypeMapping TypeName="RoadsideServiceModel.Maintenance">
-              <MappingFragment StoreEntitySet="Maintenance">
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="MaintenanceDate" ColumnName="MaintenanceDate" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
-                <ScalarProperty Name="MaintenanceID" ColumnName="MaintenanceID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PaymentMethods">
             <EntityTypeMapping TypeName="RoadsideServiceModel.PaymentMethods">
               <MappingFragment StoreEntitySet="PaymentMethods">
@@ -1081,20 +764,11 @@
           <EntitySetMapping Name="Payments">
             <EntityTypeMapping TypeName="RoadsideServiceModel.Payments">
               <MappingFragment StoreEntitySet="Payments">
-                <ScalarProperty Name="PaymentStatusID" ColumnName="PaymentStatusID" />
                 <ScalarProperty Name="PaymentMethodID" ColumnName="PaymentMethodID" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
                 <ScalarProperty Name="BookingID" ColumnName="BookingID" />
                 <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PaymentStatus">
-            <EntityTypeMapping TypeName="RoadsideServiceModel.PaymentStatus">
-              <MappingFragment StoreEntitySet="PaymentStatus">
-                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
-                <ScalarProperty Name="PaymentStatusID" ColumnName="PaymentStatusID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1132,7 +806,6 @@
           <EntitySetMapping Name="ServiceOrders">
             <EntityTypeMapping TypeName="RoadsideServiceModel.ServiceOrders">
               <MappingFragment StoreEntitySet="ServiceOrders">
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
@@ -1143,7 +816,6 @@
           <EntitySetMapping Name="ServicePayments">
             <EntityTypeMapping TypeName="RoadsideServiceModel.ServicePayments">
               <MappingFragment StoreEntitySet="ServicePayments">
-                <ScalarProperty Name="PaymentStatusID" ColumnName="PaymentStatusID" />
                 <ScalarProperty Name="PaymentMethodID" ColumnName="PaymentMethodID" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
@@ -1160,26 +832,6 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ServiceStatus">
-            <EntityTypeMapping TypeName="RoadsideServiceModel.ServiceStatus">
-              <MappingFragment StoreEntitySet="ServiceStatus">
-                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
-                <ScalarProperty Name="ServiceStatusID" ColumnName="ServiceStatusID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Shifts">
-            <EntityTypeMapping TypeName="RoadsideServiceModel.Shifts">
-              <MappingFragment StoreEntitySet="Shifts">
-                <ScalarProperty Name="IsHoliday" ColumnName="IsHoliday" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="ShiftDate" ColumnName="ShiftDate" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

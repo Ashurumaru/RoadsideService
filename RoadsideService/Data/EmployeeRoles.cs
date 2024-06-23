@@ -23,8 +23,6 @@ namespace RoadsideService.Data
         public int RoleID { get; set; }
         public string RoleName { get; set; }
         public string Description { get; set; }
-        public Nullable<decimal> HourlyRate { get; set; }
-        public Nullable<decimal> HighHourlyRate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employees> Employees { get; set; }
