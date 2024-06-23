@@ -906,7 +906,7 @@
         <Setter Property="CanUserResizeColumns" Value="false"/>
         <Setter Property="BorderBrush" Value="#DEDEDE" />
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="#E91E63"/>
+        <Setter Property="Foreground" Value="#333333"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="GridLinesVisibility" Value="Horizontal" />
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>

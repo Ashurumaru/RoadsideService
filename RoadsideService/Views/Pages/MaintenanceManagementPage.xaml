@@ -21,16 +21,16 @@
         <DataGrid x:Name="MaintenanceDataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Sorting="MaintenanceDataGrid_Sorting">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="300"/>
-                <DataGridTextColumn Header="Дата" Binding="{Binding MaintenanceDate, StringFormat={}{0:dd.MM.yyyy}}" Width="120"/>
-                <DataGridTextColumn Header="Стоимость" Binding="{Binding Cost, StringFormat={}{0} ₽}" Width="100"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding MaintenanceDate, StringFormat={}{0:dd.MM.yyyy}}" Width="90"/>
+                <DataGridTextColumn Header="Стоимость" Binding="{Binding Cost, StringFormat={}{0} ₽}" Width="90"/>
                 <DataGridTextColumn Header="Номер" Binding="{Binding RoomNumber}" Width="80" SortMemberPath="RoomNumber"/>
-                <DataGridTextColumn Header="Сотрудник" Binding="{Binding EmployeeFullName}" Width="200"/>
-                <DataGridTemplateColumn Header="Действия" Width="200">
+                <DataGridTextColumn Header="Сотрудник" Binding="{Binding EmployeeFullName}" Width="150"/>
+                <DataGridTemplateColumn Header="Действия" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="Редактировать" Click="EditMaintenanceButton_Click" Width="100" CommandParameter="{Binding MaintenanceID}" Margin="5"/>
-                                <Button Content="Удалить" Click="DeleteMaintenanceButton_Click" Width="100" CommandParameter="{Binding MaintenanceID}" Margin="5"/>
+                                <Button Content="Редактировать" Click="EditMaintenanceButton_Click" Width="120" CommandParameter="{Binding MaintenanceID}" Margin="5"/>
+                                <Button Content="Удалить" Click="DeleteMaintenanceButton_Click" Width="80" CommandParameter="{Binding MaintenanceID}" Margin="5"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

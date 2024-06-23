@@ -34,17 +34,23 @@ namespace RoadsideService.Views.Pages
             LoadRooms();
             this.Loaded += RoomManagementPage_Loaded; // Подписка на событие Loaded
         }
+
         private void RoomManagementPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService != null)
             {
                 this.NavigationService.Navigated += OnNavigated;
             }
+            // Инициализация обработчиков событий для ComboBox
+            FilterStatusComboBox.SelectionChanged += FilterComboBox_SelectionChanged;
+            FilterTypeComboBox.SelectionChanged += FilterComboBox_SelectionChanged;
         }
+
         private void OnNavigated(object sender, NavigationEventArgs e)
         {
             LoadRooms();
         }
+
         private void LoadRoomTypes()
         {
             var roomTypes = _context.RoomTypes.ToList();
@@ -69,7 +75,7 @@ namespace RoadsideService.Views.Pages
                 RoomNumber = r.RoomNumber,
                 PricePerNight = r.PricePerNight,
                 RoomType = r.RoomTypes.RoomType,
-                RoomTypeID = r.RoomTypeID, 
+                RoomTypeID = r.RoomTypeID,
                 MaxOccupancy = r.MaxOccupancy,
                 RoomStatus = GetRoomStatus(r),
                 Residents = GetRoomResidents(r)
@@ -129,10 +135,6 @@ namespace RoadsideService.Views.Pages
 
         private void ApplyFilter()
         {
-
-        }
-        private void ApplyFilter_Click(object sender, RoutedEventArgs e)
-        {
             string statusFilter = (FilterStatusComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
             string typeFilter = (FilterTypeComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
 
@@ -163,6 +165,14 @@ namespace RoadsideService.Views.Pages
             }
 
             RoomsItemControl.ItemsSource = roomList;
+        }
+
+        private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (FilterStatusComboBox != null && FilterTypeComboBox != null)
+            {
+                ApplyFilter();
+            }
         }
 
         private void RoomItem_MouseDown(object sender, MouseButtonEventArgs e)
@@ -264,10 +274,6 @@ namespace RoadsideService.Views.Pages
                     NavigationService.Navigate(new BookingCreateEditPage(room));
                 }
             }
-        }
-        private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ApplyFilter();
         }
         private void ManageBookings_Click(object sender, RoutedEventArgs e)
         {

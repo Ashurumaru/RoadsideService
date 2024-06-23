@@ -28,7 +28,7 @@ namespace RoadsideService.Views.Pages
                 {
                     MaintenanceID = mr.m.MaintenanceID,
                     RoomNumber = mr.r.RoomNumber,
-                    EmployeeFullName = e.LastName + " " + e.FirstName + " " + e.MiddleName,
+                    EmployeeFullName = e.LastName + " " + e.FirstName,
                     MaintenanceDate = mr.m.MaintenanceDate,
                     Description = mr.m.Description,
                     Cost = (decimal)mr.m.Cost
