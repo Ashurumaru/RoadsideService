@@ -25,7 +25,7 @@ namespace RoadsideService.Utils
                         return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#9E9E9E")); // Gray
                 }
             }
-            return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#9E9E9E")); 
+            return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#9E9E9E"));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

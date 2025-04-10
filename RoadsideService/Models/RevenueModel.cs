@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoadsideService.Models
 {
@@ -13,6 +9,5 @@ namespace RoadsideService.Models
         public decimal Amount { get; set; }
         public string PaymentMethod { get; set; }
         public string CustomerName { get; set; }
-
     }
 }

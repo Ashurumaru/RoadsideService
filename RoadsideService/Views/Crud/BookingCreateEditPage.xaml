@@ -1,90 +1,132 @@
 ﻿<Page x:Class="RoadsideService.Views.Crud.BookingCreateEditPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="BookingManagementPage">
-
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      d:DesignHeight="550" d:DesignWidth="800" Title="Управление бронированием"
+      Unloaded="Page_Unloaded">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TabControl Grid.Row="0">
             <TabItem Header="Бронирование">
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Margin="10">
-                        <Label Content="Комната:"/>
-                        <ComboBox x:Name="RoomComboBox" DisplayMemberPath="RoomNumber" SelectedValuePath="RoomID"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                        <Label Content="Клиент:"/>
-                        <ComboBox x:Name="CustomerComboBox" DisplayMemberPath="FullName" SelectedValuePath="CustomerID"/>
+                    <Label Content="Комната:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+                    <ComboBox x:Name="RoomComboBox" Grid.Row="0" Grid.Column="1" Margin="5"
+                              DisplayMemberPath="RoomNumber" SelectedValuePath="RoomID" />
 
-                        <Label Content="Дата заезда:"/>
-                        <DatePicker x:Name="CheckInDatePicker" SelectedDateChanged="CheckInDatePicker_SelectedDateChanged"/>
+                    <Label Content="Клиент:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+                    <ComboBox x:Name="CustomerComboBox" Grid.Row="1" Grid.Column="1" Margin="5"
+                              DisplayMemberPath="FullName"
+                              SelectedValuePath="CustomerID" />
 
-                        <Label Content="Дата выезда:"/>
-                        <DatePicker x:Name="CheckOutDatePicker" SelectedDateChanged="CheckOutDatePicker_SelectedDateChanged"/>
+                    <Label Content="Дата заезда:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+                    <DatePicker x:Name="CheckInDatePicker" Grid.Row="2" Grid.Column="1" Margin="5"
+                                SelectedDateChanged="CheckInDatePicker_SelectedDateChanged" />
 
-                        <Label Content="Количество гостей:"/>
-                        <TextBox x:Name="NumberOfGuestsTextBox"/>
+                    <Label Content="Дата выезда:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
+                    <DatePicker x:Name="CheckOutDatePicker" Grid.Row="3" Grid.Column="1" Margin="5"
+                                SelectedDateChanged="CheckOutDatePicker_SelectedDateChanged" />
 
-                        <Label Content="Статус:"/>
-                        <ComboBox x:Name="StatusComboBox" DisplayMemberPath="StatusName" SelectedValuePath="StatusID"/>
+                    <Label Content="Кол-во гостей:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" />
+                    <TextBox x:Name="NumberOfGuestsTextBox" Grid.Row="4" Grid.Column="1" Margin="5" />
 
-                        <Label Content="Общая стоимость:"/>
-                        <TextBox x:Name="TotalPriceTextBox" IsReadOnly="True"/>
-                    </StackPanel>
+                    <Label Content="Статус:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" />
+                    <ComboBox x:Name="StatusComboBox" Grid.Row="5" Grid.Column="1" Margin="5"
+                              DisplayMemberPath="StatusName"
+                              SelectedValuePath="StatusID" />
+
+                    <Label Content="Общая стоимость:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" />
+                    <TextBox x:Name="TotalPriceTextBox" Grid.Row="6" Grid.Column="1" Margin="5" IsReadOnly="True" FontWeight="Bold" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Оплата">
+            <TabItem Header="Оплата" x:Name="PaymentTabItem">
                 <Grid Margin="10">
-                    <StackPanel>
-                        <Label Content="Оплаты:"/>
-                        <DataGrid x:Name="PaymentsDataGrid" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="300">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Дата" Binding="{Binding PaymentDate, StringFormat={}{0:dd/MM/yyyy}}" Width="100"/>
-                                <DataGridTextColumn Header="Сумма" Binding="{Binding Amount, StringFormat={}{0} ₽}" Width="100"/>
-                                <DataGridTextColumn Header="Метод оплаты" Binding="{Binding PaymentMethods.MethodName}" Width="*"/>
-                                <DataGridTemplateColumn Header="Действия" Width="*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                <Button Content="Редактировать" Click="EditPaymentButton_Click" Width="120" CommandParameter="{Binding PaymentID}" Margin="5"/>
-                                                <Button Content="Удалить" Click="DeletePaymentButton_Click" Width="100" CommandParameter="{Binding PaymentID}" Margin="5"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                        <Label Content="Сумма оплаты:"/>
-                        <TextBox x:Name="PaymentAmountTextBox" Margin="0,0,0,5"/>
+                    <Label Content="Платежи по бронированию:" Grid.Row="0" FontWeight="Bold" />
 
-                        <Label Content="Дата оплаты:"/>
-                        <DatePicker x:Name="PaymentDatePicker" Margin="0,0,0,5"/>
+                    <DataGrid x:Name="PaymentsDataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" CanUserAddRows="False" Margin="0,5,0,10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Дата" Binding="{Binding PaymentDate, StringFormat={}{0:dd.MM.yyyy}}" Width="100" />
+                            <DataGridTextColumn Header="Сумма" Binding="{Binding Amount, StringFormat={}{0:N2} ₽}" Width="120">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Метод оплаты" Binding="{Binding PaymentMethods.MethodName}" Width="*" />
+                            <DataGridTemplateColumn Header="Действия" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Content="✏️" ToolTip="Редактировать" Click="EditPaymentButton_Click" CommandParameter="{Binding PaymentID}" Margin="2" Padding="5,2" />
+                                            <Button Content="🗑️" ToolTip="Удалить" Click="DeletePaymentButton_Click" CommandParameter="{Binding PaymentID}" Margin="2" Padding="5,2" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
-                        <Label Content="Метод оплаты:"/>
-                        <ComboBox x:Name="PaymentMethodComboBox" DisplayMemberPath="MethodName" SelectedValuePath="PaymentMethodID" Margin="0,0,0,10"/>
+                    <Grid Grid.Row="2" Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                        <StackPanel Orientation="Horizontal" Margin="10,0,0,0" HorizontalAlignment="Right">
-                            <Button Content="Добавить оплату" Click="AddPaymentButton_Click" Margin="0,5,5,0" Width="180" />
-                        </StackPanel>
+                        <Label Content="Сумма:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+                        <TextBox x:Name="PaymentAmountTextBox" Grid.Row="0" Grid.Column="1" Margin="5" />
+
+                        <Label Content="Дата:" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" />
+                        <DatePicker x:Name="PaymentDatePicker" Grid.Row="0" Grid.Column="3" Margin="5" />
+
+                        <Label Content="Метод:" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" />
+                        <ComboBox x:Name="PaymentMethodComboBox" Grid.Row="0" Grid.Column="5" Margin="5"
+                                   DisplayMemberPath="MethodName" SelectedValuePath="PaymentMethodID" />
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,10,0,0" HorizontalAlignment="Right">
+                        <Button x:Name="AddOrUpdatePaymentButton" Content="Добавить оплату" Click="AddOrUpdatePaymentButton_Click" Margin="5" Width="180" />
                     </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,0,0,0" Grid.Row="1">
-            <Button Content="Сохранить" Click="SaveButton_Click" Margin="0,5,5,0" Width="100"/>
-            <Button Content="Отмена" Click="CancelButton_Click" Margin="5,5,0,0" Width="100"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Grid.Row="1">
+            <Button Content="Сохранить бронь" Click="SaveButton_Click" Margin="0,0,5,0" Width="150" FontWeight="Bold" />
+            <Button Content="Отмена" Click="CancelButton_Click" Margin="5,0,0,0" Width="100" />
         </StackPanel>
     </Grid>
 </Page>

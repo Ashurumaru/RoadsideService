@@ -218,7 +218,6 @@ namespace RoadsideService.Views.Crud
             }
         }
 
-
         private void UpdateRemainingPayment()
         {
             if (_serviceOrder != null)

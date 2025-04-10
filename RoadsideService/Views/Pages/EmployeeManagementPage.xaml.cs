@@ -81,7 +81,6 @@ namespace RoadsideService.Views.Pages
         private void RoleManagementShow_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new EmployeeRolesManagementPage());
-
         }
     }
 }

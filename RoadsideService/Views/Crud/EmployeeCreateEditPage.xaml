@@ -9,46 +9,46 @@
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Width="250">
-            <Label Content="Имя:"/>
-            <TextBox x:Name="FirstNameTextBox"/>
+            <Label Content="Имя:" />
+            <TextBox x:Name="FirstNameTextBox" />
 
-            <Label Content="Отчество:"/>
-            <TextBox x:Name="MiddleNameTextBox"/>
+            <Label Content="Отчество:" />
+            <TextBox x:Name="MiddleNameTextBox" />
 
-            <Label Content="Фамилия:"/>
-            <TextBox x:Name="LastNameTextBox"/>
+            <Label Content="Фамилия:" />
+            <TextBox x:Name="LastNameTextBox" />
 
-            <Label Content="Телефон:"/>
-            <TextBox x:Name="PhoneTextBox"/>
+            <Label Content="Телефон:" />
+            <TextBox x:Name="PhoneTextBox" />
 
-            <Label Content="Эл. почта:"/>
-            <TextBox x:Name="EmailTextBox"/>
+            <Label Content="Эл. почта:" />
+            <TextBox x:Name="EmailTextBox" />
 
-            <Label Content="Дата найма:"/>
-            <DatePicker x:Name="HireDatePicker"/>
+            <Label Content="Дата найма:" />
+            <DatePicker x:Name="HireDatePicker" />
 
-            <Label Content="Роль:"/>
-            <ComboBox x:Name="RoleComboBox"/>
+            <Label Content="Роль:" />
+            <ComboBox x:Name="RoleComboBox" />
 
-            <Label Content="Логин:"/>
-            <TextBox x:Name="LoginTextBox"/>
+            <Label Content="Логин:" />
+            <TextBox x:Name="LoginTextBox" />
 
-            <Label Content="Пароль:"/>
+            <Label Content="Пароль:" />
             <StackPanel Orientation="Horizontal">
                 <TextBox x:Name="PasswordTextBox" Margin="0" Width="170" Visibility="Collapsed" />
-                <PasswordBox x:Name="PasswordBox" Width="170" Visibility="Visible"/>
-                <Button Content="Показать" Width="80" Click="TogglePasswordVisibility_Click"/>
+                <PasswordBox x:Name="PasswordBox" Width="170" Visibility="Visible" />
+                <Button Content="Показать" Width="80" Click="TogglePasswordVisibility_Click" />
             </StackPanel>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10">
-            <Button x:Name="SaveButton" Content="Сохранить" Width="100" HorizontalAlignment="Left" Click="SaveButton_Click" Margin="0,5,5,0"/>
-            <Button x:Name="CancelButton" Content="Отмена" Width="100" HorizontalAlignment="Left" Click="CancelButton_Click" Margin="5,5,0,0"/>
+            <Button x:Name="SaveButton" Content="Сохранить" Width="100" HorizontalAlignment="Left" Click="SaveButton_Click" Margin="0,5,5,0" />
+            <Button x:Name="CancelButton" Content="Отмена" Width="100" HorizontalAlignment="Left" Click="CancelButton_Click" Margin="5,5,0,0" />
         </StackPanel>
     </Grid>
 </Page>

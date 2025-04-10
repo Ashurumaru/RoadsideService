@@ -9,36 +9,36 @@
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel>
             <Grid Margin="5">
-                <TextBlock Text="Управление заказами автосервиса" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                <TextBlock Text="Управление заказами автосервиса" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button x:Name="AddServiceOrderButton" Content="Добавить заказ" Width="140" Margin="0 0 10 0" Click="AddServiceOrderButton_Click" />
-                    <Button x:Name="ManagementServiceOrderButton" Content="Услуги" Width="140" Click="ManagementServiceOrderButton_Click" HorizontalAlignment="Right"/>
+                    <Button x:Name="ManagementServiceOrderButton" Content="Услуги" Width="140" Click="ManagementServiceOrderButton_Click" HorizontalAlignment="Right" />
                 </StackPanel>
             </Grid>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-                <Label Content="Фильтр по клиенту:" VerticalAlignment="Center"/>
-                <ComboBox x:Name="CustomerFilterComboBox" Width="150" Margin="0,0,10,0" SelectionChanged="FilterComboBox_SelectionChanged"/>
+                <Label Content="Фильтр по клиенту:" VerticalAlignment="Center" />
+                <ComboBox x:Name="CustomerFilterComboBox" Width="150" Margin="0,0,10,0" SelectionChanged="FilterComboBox_SelectionChanged" />
             </StackPanel>
         </StackPanel>
 
         <DataGrid x:Name="ServiceOrdersDataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" SelectionChanged="ServiceOrdersDataGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Клиент" Binding="{Binding CustomerName}" Width="150"/>
-                <DataGridTextColumn Header="Телефон" Binding="{Binding CustomerPhone}" Width="150"/>
-                <DataGridTextColumn Header="Дата заказа" Binding="{Binding OrderDate, StringFormat={}{0:dd/MM/yyyy}}" Width="120"/>
-                <DataGridTextColumn Header="Общая стоимость" Binding="{Binding TotalPrice, StringFormat={}{0} ₽}" Width="150"/>
+                <DataGridTextColumn Header="Клиент" Binding="{Binding CustomerName}" Width="150" />
+                <DataGridTextColumn Header="Телефон" Binding="{Binding CustomerPhone}" Width="150" />
+                <DataGridTextColumn Header="Дата заказа" Binding="{Binding OrderDate, StringFormat={}{0:dd/MM/yyyy}}" Width="120" />
+                <DataGridTextColumn Header="Общая стоимость" Binding="{Binding TotalPrice, StringFormat={}{0} ₽}" Width="150" />
                 <DataGridTemplateColumn Header="Действия" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="Редактировать" Click="EditServiceOrderButton_Click" Width="120" CommandParameter="{Binding OrderID}" Margin="5"/>
-                                <Button Content="Удалить" Click="DeleteServiceOrderButton_Click" Width="100" CommandParameter="{Binding OrderID}" Margin="5"/>
+                                <Button Content="Редактировать" Click="EditServiceOrderButton_Click" Width="120" CommandParameter="{Binding OrderID}" Margin="5" />
+                                <Button Content="Удалить" Click="DeleteServiceOrderButton_Click" Width="100" CommandParameter="{Binding OrderID}" Margin="5" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

@@ -5,17 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
 
@@ -39,7 +30,7 @@ namespace RoadsideService.Views.Reports
         private void LoadCurrentOccupancyData(DateTime selectedDate)
         {
             var roomOccupancy = _context.Bookings
-                .Where(b => b.CheckInDate <= selectedDate && b.CheckOutDate >= selectedDate && (b.StatusID == 2 || b.StatusID == 3 || b.StatusID == 5) )
+                .Where(b => b.CheckInDate <= selectedDate && b.CheckOutDate >= selectedDate && (b.StatusID == 2 || b.StatusID == 3 || b.StatusID == 5))
                 .Join(_context.Rooms, b => b.RoomID, r => r.RoomID, (b, r) => new { b, r })
                 .Join(_context.Customers, br => br.b.CustomerID, c => c.CustomerID, (br, c) => new { br, c })
                 .Join(_context.BookingStatus, brc => brc.br.b.StatusID, bs => bs.StatusID, (brc, bs) => new RoomOccupancyModel
@@ -92,7 +83,6 @@ namespace RoadsideService.Views.Reports
                                .Bold()
                                .Alignment = Alignment.center;
                 doc.InsertParagraph("\n");
-
 
                 var periodInfo = doc.InsertParagraph($"Отчет за: {selectedDate:dd.MM.yyyy}")
                                    .FontSize(12)
@@ -151,7 +141,6 @@ namespace RoadsideService.Views.Reports
                         .FontSize(12);
                 }
 
-
                 var signatureTable = doc.AddTable(5, 4);
 
                 signatureTable.Rows[1].Cells[0].Paragraphs.First().Append("_________________________");
@@ -188,6 +177,5 @@ namespace RoadsideService.Views.Reports
             Process.Start("explorer.exe", filePath);
             MessageBox.Show("Отчет успешно сохранен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
     }
 }

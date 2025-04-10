@@ -1,6 +1,4 @@
 ﻿using RoadsideService.Data;
-using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -29,7 +27,6 @@ namespace RoadsideService.Views.Crud
             {
                 RoleNameTextBox.Text = _role.RoleName;
                 DescriptionTextBox.Text = _role.Description;
-
             }
         }
 
@@ -43,7 +40,6 @@ namespace RoadsideService.Views.Crud
 
             _role.RoleName = RoleNameTextBox.Text;
             _role.Description = DescriptionTextBox.Text;
-
 
             _context.SaveChanges();
 

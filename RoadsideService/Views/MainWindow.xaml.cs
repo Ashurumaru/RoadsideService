@@ -1,18 +1,7 @@
 ﻿using RoadsideService.Models;
 using RoadsideService.Views.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RoadsideService.Views
 {
@@ -25,7 +14,7 @@ namespace RoadsideService.Views
         {
             InitializeComponent();
             txblName.Text = UserModel.GetFullName();
-            txblEmail.Text =UserModel.Email;
+            txblEmail.Text = UserModel.Email;
 
             if (UserModel.RoleId != 3)
             {
@@ -43,7 +32,6 @@ namespace RoadsideService.Views
             PagesNavigation.Navigate(new AutoServiceManagementPage());
         }
 
-
         private void CustomerPage_Click(object sender, RoutedEventArgs e)
         {
             PagesNavigation.Navigate(new ClientManagementPage());
@@ -58,6 +46,7 @@ namespace RoadsideService.Views
         {
             PagesNavigation.Navigate(new ReportManagementPage());
         }
+
         private void btn_close_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

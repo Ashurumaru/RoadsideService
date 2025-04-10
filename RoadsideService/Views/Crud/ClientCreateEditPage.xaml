@@ -9,27 +9,27 @@
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Label Content="Имя:"/>
-            <TextBox x:Name="FirstNameTextBox" Width="250"/>
+            <Label Content="Имя:" />
+            <TextBox x:Name="FirstNameTextBox" Width="250" />
 
-            <Label Content="Отчество:"/>
-            <TextBox x:Name="MiddleNameTextBox"/>
+            <Label Content="Отчество:" />
+            <TextBox x:Name="MiddleNameTextBox" />
 
-            <Label Content="Фамилия:"/>
-            <TextBox x:Name="LastNameTextBox"/>
+            <Label Content="Фамилия:" />
+            <TextBox x:Name="LastNameTextBox" />
 
-            <Label Content="Телефон:"/>
-            <TextBox x:Name="PhoneTextBox"/>
+            <Label Content="Телефон:" />
+            <TextBox x:Name="PhoneTextBox" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10">
-            <Button x:Name="SaveButton" Content="Сохранить" Width="100" HorizontalAlignment="Left" Click="SaveButton_Click" Margin="0,5,5,0"/>
-            <Button x:Name="CancelButton" Content="Отмена" Width="100" HorizontalAlignment="Left" Click="CancelButton_Click" Margin="5,5,0,0"/>
+            <Button x:Name="SaveButton" Content="Сохранить" Width="100" HorizontalAlignment="Left" Click="SaveButton_Click" Margin="0,5,5,0" />
+            <Button x:Name="CancelButton" Content="Отмена" Width="100" HorizontalAlignment="Left" Click="CancelButton_Click" Margin="5,5,0,0" />
         </StackPanel>
     </Grid>
 </Page>

@@ -1,15 +1,15 @@
-﻿using System.Linq;
+﻿using RoadsideService.Data;
+using RoadsideService.Views.Crud;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using RoadsideService.Data;
-using RoadsideService.Views.Crud;
 
 namespace RoadsideService.Views.Pages
 {
     public partial class BookingManagementPage : Page
     {
-private RoadsideServiceEntities _context;
+        private RoadsideServiceEntities _context;
 
         public BookingManagementPage()
         {
@@ -18,7 +18,7 @@ private RoadsideServiceEntities _context;
             LoadRoomFilter();
             LoadStatusFilter();
             LoadBookings();
-            this.Loaded += BookingManagementPage_Loaded; 
+            this.Loaded += BookingManagementPage_Loaded;
         }
 
         private void BookingManagementPage_Loaded(object sender, RoutedEventArgs e)
@@ -159,7 +159,6 @@ private RoadsideServiceEntities _context;
                 }
             }
         }
-
 
         private void BookingsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
